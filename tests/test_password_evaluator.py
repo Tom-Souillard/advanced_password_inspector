@@ -56,7 +56,7 @@ def test_evaluate_password_empty_input():
     assert str(excinfo.value) == "Password must not be empty"
 
 @pytest.mark.parametrize("password, api_response, expected_result", [
-    ("12345678", "0018A45C4D1DEF81644B54AB7F969B88D65:1", True),  # Password is breached
+    ("12345678", "FB2927D828AF22F592134E8932480637C0D:1", True),  # Password is breached
     ("P@ssw0rd!", "00A4A8D501AA5A9902F3F7F8BD9560B1439:5", False),  # Password is safe
 ])
 def test_check_password_breach(password, api_response, expected_result):
