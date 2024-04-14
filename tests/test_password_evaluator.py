@@ -1,6 +1,7 @@
 import pytest
-from src.core.password_evaluator import evaluate_password
-from unittest.mock import patch
+from src.core.password_evaluator import evaluate_password, check_password_breach
+from unittest.mock import patch, Mock
+import requests
 
 # Données simulées pour les réponses de zxcvbn
 mock_zxcvbn_response_weak = {
@@ -53,3 +54,26 @@ def test_evaluate_password_empty_input():
     with pytest.raises(ValueError) as excinfo:
         evaluate_password(password)
     assert str(excinfo.value) == "Password must not be empty"
+
+@pytest.mark.parametrize("password, api_response, expected_result", [
+    ("12345678", "FB2927D828AF22F592134E8932480637C0D:1", True),  # Password is breached
+    ("P@ssw0rd!", "00A4A8D501AA5A9902F3F7F8BD9560B1439:5", False),  # Password is safe
+])
+def test_check_password_breach(password, api_response, expected_result):
+    """
+    Test the check_password_breach function to ensure it properly detects if a password has been exposed in data breaches.
+    """
+    mock_response = Mock()
+    mock_response.text = api_response
+    with patch('requests.get', return_value=mock_response):
+        result = check_password_breach(password)
+        assert result == expected_result, f"Expected {expected_result} for password '{password}' but got {result}."
+
+def test_check_password_breach_connection_error():
+    """
+    Test the check_password_breach function to handle connection errors gracefully.
+    """
+    password = "P@ssw0rd!"
+    with patch('requests.get', side_effect=requests.exceptions.RequestException):
+        result = check_password_breach(password)
+        assert result is None, "Expected result should be None when there is a connection error."
