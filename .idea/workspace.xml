@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f333580-b036-455d-ba92-d6430b289254" name="Changes" comment="[chore][closes #1][closes #2]: Initial project setup with system architecture and environment configuration&#10;&#10;This initial commit sets up the fundamental structure and tools required for the project. It includes:&#10;&#10;1. **System Architecture Design**:&#10;   - Created the directory structure aligning with the planned system architecture.&#10;   - Defined the basic modules and interfaces that will form the backbone of the application.&#10;&#10;2. **Python Development Environment Setup**:&#10;   - Configured a virtual environment to manage dependencies isolated from the global Python environment.&#10;   - Installed essential libraries such as pytest for testing, and zxcvbn for password strength evaluation, documented in a requirements.txt file.&#10;&#10;3. **Initial Repository Setup**:&#10;   - Added .gitignore to exclude unnecessary files from version control (e.g., __pycache__, .env).&#10;   - Created initial README.md to provide an overview of the project, setup instructions, and usage guidelines.&#10;&#10;This setup lays the groundwork for efficient development and testing, ensuring that all development efforts are built on a solid and well-documented foundation.">
-      <change beforePath="$PROJECT_DIR$/.idea/advanced_password_inspector.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/advanced_password_inspector.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/password_evaluator.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/password_evaluator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,14 +28,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "feature/zxcvbn__integration",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
