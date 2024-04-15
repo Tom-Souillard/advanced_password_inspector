@@ -1,5 +1,5 @@
 import pytest
-from src.core.password_evaluator import evaluate_password, check_password_breach
+from src.core.password_evaluator import evaluate_password, check_password_breach, estimate_crack_time
 from unittest.mock import patch, Mock
 import requests
 
@@ -19,6 +19,12 @@ mock_zxcvbn_response_strong = {
         'suggestions': ['Your password is strong.']
     }
 }
+
+mock_responses = {
+    'weak': {'crack_times_seconds': {'online_throttling_100_per_hour': 3600, 'offline_slow_hashing_1e4_per_second': 0.5}},
+    'strong': {'crack_times_seconds': {'online_throttling_100_per_hour': 31536000, 'offline_slow_hashing_1e4_per_second': 20000}}
+}
+
 
 @pytest.mark.parametrize("password, expected_score, expected_suggestion", [
     ("password123", 0, 'Add another word or two. Uncommon words are better.'),
@@ -77,3 +83,18 @@ def test_check_password_breach_connection_error():
     with patch('requests.get', side_effect=requests.exceptions.RequestException):
         result = check_password_breach(password)
         assert result is None, "Expected result should be None when there is a connection error."
+
+
+@pytest.mark.parametrize("password, expected_time, strength", [
+    ("123456", "instant", 'weak'),
+    ("strongpassword12345!", "centuries", 'strong'),
+])
+def test_estimate_crack_time(password, expected_time, strength):
+    """
+    Test the estimate_crack_time function to ensure it provides accurate crack time estimates.
+    """
+    with patch('src.core.password_evaluator.zxcvbn', return_value=mock_responses[strength]):
+        result = estimate_crack_time(password)
+        # Assuming 'crack_time_display' is a key in the result that formats the time into a readable format
+        assert result['crack_time_display'] == expected_time, \
+            f"Expected {expected_time} for {password}, but got {result['crack_time_display']} instead."
