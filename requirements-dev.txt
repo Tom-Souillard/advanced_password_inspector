@@ -1,0 +1,6 @@
+pytest>=8.1.1
+twine>=5.0.0
+colorama>=0.4.6
+Pygments>=2.17.2
+rich>=13.7.1
+readme_renderer>=43.0
